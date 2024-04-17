@@ -1,13 +1,5 @@
-﻿using System.Text;
+﻿using RegisterLogin;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RegisterLoginWPF
 {
@@ -16,9 +8,36 @@ namespace RegisterLoginWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly LoginManager loginManager = new();
+        //private string loggedUsername = "";
+        private readonly PgStart pgStart;
+        private readonly PgLogin pgLogin;
+        private readonly PgRegister pgRegister;
         public MainWindow()
         {
+            pgStart = new PgStart(this);
+            pgLogin = new PgLogin(loginManager, this);
+            pgRegister = new PgRegister(loginManager, this);
             InitializeComponent();
+            loginManager.LoadFromTxt();
+            frm.Navigate(pgStart);
         }
+
+        public void GoToLogin()
+        {
+            frm.Navigate(pgLogin);
+        }
+
+        public void GoToLogin(string username)
+        {
+            pgLogin.txtLoginUser.Text = username;
+            frm.Navigate(pgLogin);
+        }
+
+        public void GoToReg()
+        {
+            frm.Navigate(pgRegister);
+        }
+
     }
 }

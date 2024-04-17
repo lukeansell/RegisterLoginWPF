@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace RegisterLogin
 {
@@ -28,8 +24,8 @@ namespace RegisterLogin
                 StreamReader readtext = new(txt);
                 while (!readtext.EndOfStream)
                 {
-                    string username = readtext.ReadLine();
-                    string password = readtext.ReadLine();
+                    string? username = readtext.ReadLine();
+                    string? password = readtext.ReadLine();
                     AddUser(username, password);
                 }
                 readtext.Close();
@@ -69,7 +65,7 @@ namespace RegisterLogin
             return true;
         }
 
-        public bool AddUser(string username, string password)
+        public bool AddUser(string? username, string? password)
         {
             return username != null && password != null && AddUser(new Login(username, password));
         }
