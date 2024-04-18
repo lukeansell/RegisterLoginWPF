@@ -34,9 +34,9 @@ namespace RegisterLoginWPF
         {
             string username = txtRegUsername.Text;
             string password = txtRegPassword.Text;
-            if (loginManager.AddUser(new Login(username, password)))
+            if (loginManager.AddUser(username, password))
             {
-                loginManager.AddUserToTxt(username, password);
+                //loginManager.AddUserToTxt(username, password);
                 lblRegStatus.Content = "Registration was successful";
                 
                 window.GoToLogin();
